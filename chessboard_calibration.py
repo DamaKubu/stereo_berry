@@ -71,7 +71,7 @@ def capture_calibration_images(picam2, chessboard_size, num_images=20):
         frame = picam2.capture_array()
         
         # Convert YUYV to BGR for OpenCV processing
-        if frame.shape[2] == 2:  # YUYV format has 2 channels
+        if frame.ndim >= 3 and frame.shape[2] == 2:  # YUYV format has 2 channels
             gray = cv2.cvtColor(frame, cv2.COLOR_YUV2GRAY_YUYV)
             display_frame = cv2.cvtColor(frame, cv2.COLOR_YUV2BGR_YUYV)
         else:
@@ -180,6 +180,7 @@ def main():
     print(f"Format: YUYV (uncompressed)")
     print("=" * 60)
     
+    picam2 = None
     try:
         # Setup camera with YUYV format
         picam2 = setup_camera_yuyv(args.camera, args.width, args.height)
@@ -188,9 +189,6 @@ def main():
         objpoints, imgpoints, image_size = capture_calibration_images(
             picam2, (args.rows, args.cols), args.images
         )
-        
-        # Stop camera
-        picam2.stop()
         
         # Perform calibration
         mtx, dist, error = calibrate_camera(objpoints, imgpoints, image_size)
@@ -216,6 +214,9 @@ def main():
         import traceback
         traceback.print_exc()
     finally:
+        # Ensure camera is properly stopped
+        if picam2 is not None:
+            picam2.stop()
         cv2.destroyAllWindows()
 
 
