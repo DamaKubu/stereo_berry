@@ -1,0 +1,26 @@
+# Local / generated
+__pycache__/
+*.py[cod]
+
+# Virtual environments
+.venv/
+venv/
+
+# Editor / OS
+.vscode/
+.DS_Store
+
+# Secrets / local experiments
+openai_workin.py
+
+# Local env files (never commit)
+.env
+
+# Local OpenAI key file (never commit)
+.openai_api_key
+
+# Auto tuning artifacts
+auto_runs/
+tuned_params.json
+auto_code_runs/
+

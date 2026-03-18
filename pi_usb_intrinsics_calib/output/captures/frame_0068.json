@@ -1,0 +1,18 @@
+{
+  "dev": "/dev/video0",
+  "board": {
+    "w": 8,
+    "h": 5
+  },
+  "square_mm": 25.0,
+  "timestamp": 1769444187.4496875,
+  "found": true,
+  "negotiated": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 5.0,
+    "fourcc": "YUYV"
+  },
+  "png": "output/captures/frame_0068.png",
+  "yuy2": "output/captures/frame_0068.yuy2"
+}
